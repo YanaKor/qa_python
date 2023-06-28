@@ -4,11 +4,9 @@ from main import BooksCollector
 # класс TestBooksCollector объединяет набор тестов, которыми мы покрываем наше приложение BooksCollector
 # обязательно указывать префикс Test
 class TestBooksCollector:
-    case_1 = ['Граф Монте-Кристо', 1]
-    case_2 = ['Три мушкетера', 2]
-    case_3 = ['Война и мир', 5]
-    case_4 = ['Евгений Онегин', 9]
-    case_5 = ['Вишневый сад', 10]
+    case_1 = ['Граф Монте-Кристо', -1]
+    case_2 = ['Три мушкетера', 0]
+    case_3 = ['Война и мир', 11]
 
     # пример теста:
     # обязательно указывать префикс test_
@@ -39,42 +37,30 @@ class TestBooksCollector:
 
         assert len(collector.get_books_rating()) == 1
 
-    @pytest.mark.parametrize('name, rating', (case_1, case_2, case_3, case_4, case_5))
-    def test_set_book_rating_set_rating_for_book_rating_is_equal_to_the_established(self, name, rating):
-        """Параметризация тестов на проверку установки рейтинга. ОР: Рейтинг равен установленному"""
+    def test_set_book_rating_set_rating_6_book_rating_is_equal_to_6(self):
+        """Проверка установки рейтинга = 6. ОР: Рейтинг равен 6"""
+
+        collector = BooksCollector()
+
+        collector.add_new_book('Тихий дон')
+        collector.set_book_rating('Тихий дон', 6)
+
+        assert collector.get_book_rating('Тихий дон') == 6
+
+    @pytest.mark.parametrize('name, rating', (case_1, case_2, case_3))
+    def test_set_book_rating_set_rating_for_book_rating_is_equal_to_1(self, name, rating):
+        """Параметризация тестов на проверку установки невалидного рейтинга. ОР: Рейтинг равен 1"""
 
         collector = BooksCollector()
 
         collector.add_new_book(name)
         collector.set_book_rating(name, rating)
 
-        assert collector.get_book_rating(name) == rating
-
-    def test_set_book_rating_set_rating_0_book_rating_is_equal_to_1(self):
-        """Проверка установки рейтинга = 0. ОР: Рейтинг равен 1"""
-
-        collector = BooksCollector()
-
-        collector.add_new_book('Тихий дон')
-        collector.set_book_rating('Тихий дон', 1)
-
-        assert collector.get_book_rating('Тихий дон') == 1
-
-    def test_set_book_rating_set_rating_11_book_rating_is_equal_to_1(self):
-        """Проверка установки рейтинга =  11. ОР: Рейтинг равен 1"""
-
-        collector = BooksCollector()
-
-        collector.add_new_book('Отцы и дети')
-        collector.set_book_rating('Отцы и дети', 11)
-
-        assert collector.get_book_rating('Отцы и дети') == 1
+        assert collector.get_book_rating(name) == 1
 
     def test_get_books_with_specific_rating_for_dont_exist_rating(self):
         """Проверка книг с несущестивующим рейтингом. ОР: Выведется пустой список"""
         collector = BooksCollector()
-
-        collector.add_new_book('Анна Каренина')
 
         assert len(collector.get_books_with_specific_rating(3)) == 0
 
@@ -87,7 +73,8 @@ class TestBooksCollector:
         collector.set_book_rating('Идиот', 5)
         collector.add_new_book('Му-му')
         collector.set_book_rating('Му-му', 5)
-        assert len(collector.get_books_with_specific_rating(5)) == 2
+        favourite_books = collector.get_books_with_specific_rating(5)
+        assert 'Идиот' in favourite_books and 'Му-му' in favourite_books
 
     def test_add_book_in_favorites_empty_list_of_favourite_books(self):
         """Проверка списка favorites, если не добавлены книги. ОР: Выведется пустой список"""
