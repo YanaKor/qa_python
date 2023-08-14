@@ -9,8 +9,9 @@ test_set_book_rating_set_rating_6_book_rating_is_equal_to_6                     
 test_set_book_rating_set_rating_for_book_rating_is_equal_to_1                               PASSED          [ 33%]
 test_set_book_rating_set_rating_for_book_rating_is_equal_to_1                               PASSED          [ 41%] 
 test_set_book_rating_set_rating_for_book_rating_is_equal_to_1                               PASSED          [ 50%] 
-test_get_books_with_specific_rating_for_dont_exist_rating                                   PASSED          [ 58%] 
-test_get_books_with_specific_rating                                                         PASSED          [ 66%] 
+test_get_books_with_specific_rating_for_dont_exist_rating                                   PASSED          [ 58%]
+
+test_get_books_with_specific_rating                                                         PASSED          [ 66%]
 test_add_book_in_favorites_empty_list_of_favourite_books                                    PASSED          [ 75%]
 test_add_book_in_favorites_add_book_to_favourite_list                                       PASSED          [ 83%] 
 test_delete_book_from_favorites_delete_nonexist_book_from_list_empty_favourite_list         PASSED          [ 91%] 
